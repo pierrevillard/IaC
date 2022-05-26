@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   gitlab:
-    image: 'gitlab/gitlab-ce:14.3.3-ce.0'
+    image: 'gitlab/gitlab-ce:15.0.0-ce.0'
     restart: always
     cpu_shares: 1024
     mem_limit: '4g'
@@ -25,7 +25,7 @@ services:
 
 
   jenkins:
-    image: agorakube/jenkins-2.303.2-lts-jdk11:docker-20.10.9
+    build: ./images/jenkins/
     restart: always
     cpu_shares: 500
     mem_limit: '1g'
