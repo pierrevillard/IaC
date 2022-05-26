@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:14.3.3-ce.0'
+    restart: always
+    cpu_shares: 1024
+    mem_limit: '4g'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${GITLAB_EXTERNAL_URL:-https://gitlab.local.lan}'
+        puma['worker_processes'] = 0
+        sidekiq['max_concurrency'] = 10
+        prometheus_monitoring['enable'] = false
+    ports:
+      - '80:80'
+#      - '443:443'
+#      - '22:22'
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+    networks:
+      - devops-net
+
+
+  jenkins:
+    image: agorakube/jenkins-2.303.2-lts-jdk11:docker-20.10.9
+    restart: always
+    cpu_shares: 500
+    mem_limit: '1g'
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+    networks:
+      - devops-net
+
+volumes:
+  jenkins_data: {}
+  gitlab_config: {}
+  gitlab_logs: {}
+  gitlab_data: {}
+
+networks:
+  devops-net:
+    driver: bridge
