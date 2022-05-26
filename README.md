@@ -33,3 +33,17 @@ cat /var/lib/docker/volumes/iac_gitlab_config/_data/initial_root_password
 ```
 Default user: root
 URL: http://10.20.30.10/
+
+
+# Deploy ETCD
+
+```
+docker run -d --name etcd-server \
+    --publish 2379:2379 \
+    --publish 2380:2380 \
+    --env ALLOW_NONE_AUTHENTICATION=yes \
+    --env ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379 \
+    bitnami/etcd:3.4.18
+```
+
+URL: http://10.20.30.10:2379
