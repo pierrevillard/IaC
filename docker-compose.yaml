@@ -59,6 +59,7 @@ services:
   proxy:
     image: nginx:1.21.6
     restart: always
+    container_name: proxy
     cpu_shares: 500
     mem_limit: '2g'
     volumes:
