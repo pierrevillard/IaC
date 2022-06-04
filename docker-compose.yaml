@@ -4,19 +4,23 @@ services:
   gitlab:
     image: 'gitlab/gitlab-ce:15.0.0-ce.0'
     restart: always
+    container_name: gitlab
     cpu_shares: 1024
     mem_limit: '4g'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url '${GITLAB_EXTERNAL_URL:-https://gitlab.local.lan}'
         puma['worker_processes'] = 0
+        nginx['ssl_certificate'] = "/var/gitlab/ssl/gitlab.crt"
+        nginx['ssl_certificate_key'] = "/var/gitlab/ssl/gitlab.key"
         sidekiq['max_concurrency'] = 10
         prometheus_monitoring['enable'] = false
     ports:
-      - '80:80'
-#      - '443:443'
-#      - '22:22'
+      - '8088:80'
+      - '8443:443'
+      - '2222:22'
     volumes:
+      - ./ssl/gitlab:/var/gitlab/ssl
       - gitlab_config:/etc/gitlab
       - gitlab_logs:/var/log/gitlab
       - gitlab_data:/var/opt/gitlab
@@ -27,6 +31,7 @@ services:
   jenkins:
     build: ./images/jenkins/
     restart: always
+    container_name: jenkins
     cpu_shares: 500
     mem_limit: '1g'
     volumes:
@@ -38,7 +43,35 @@ services:
     networks:
       - devops-net
 
+  nexus:
+    image: sonatype/nexus3:3.39.0
+    restart: always
+    container_name: nexus
+    cpu_shares: 500
+    mem_limit: '2g'
+    volumes:
+      - nexus_data:/nexus-data
+    ports:
+      - "8081:8081"
+    networks:
+      - devops-net
+
+  proxy:
+    image: nginx:1.21.6
+    restart: always
+    cpu_shares: 500
+    mem_limit: '2g'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/var/ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - devops-net
+
 volumes:
+  nexus_data: {}
   jenkins_data: {}
   gitlab_config: {}
   gitlab_logs: {}

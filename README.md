@@ -34,6 +34,14 @@ cat /var/lib/docker/volumes/iac_gitlab_config/_data/initial_root_password
 Default user: root
 URL: http://10.20.30.10/
 
+# Get Nexus Password
+
+```
+cat /var/lib/docker/volumes/iac_nexus_data/_data/admin.password
+```
+Default user: admin
+URL: http://10.20.30.10/
+
 
 # Deploy ETCD
 
