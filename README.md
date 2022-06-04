@@ -8,14 +8,17 @@ cd IaC
 # Can be launched with :
 
 ```
-GITLAB_EXTERNAL_URL=http://IP_DOCKER_HOST docker-compose up -d"
+./deploy.sh
 ```
+
+This script will ask you for domains used to publish Nexus, Jenkins and Gitlab URLs.
+Domain names are needed to configure/generate HTTPs certs/keys and Nginx Proxy redirects.
 
 
 # Can be totally destroyed with: 
 
 ```
-"docker-compose down -v --rmi all --remove-orphans"
+./destroy.sh
 ```
 
 # Get InitialJenkins Password:
@@ -23,7 +26,7 @@ GITLAB_EXTERNAL_URL=http://IP_DOCKER_HOST docker-compose up -d"
 ```
 cat /var/lib/docker/volumes/iac_jenkins_data/_data/secrets/initialAdminPassword
 ```
-URL: http://10.20.30.10:8080/
+URL: https://${JENKINS_DOMAIN_NAME}
 
 
 # Get InitialGitlab Password:
@@ -32,15 +35,25 @@ URL: http://10.20.30.10:8080/
 cat /var/lib/docker/volumes/iac_gitlab_config/_data/initial_root_password
 ```
 Default user: root
-URL: http://10.20.30.10/
+URL: https://${GITLAB_DOMAIN_NAME}
 
+Due to self-signed certs
+
+```
+git -c http.sslVerify=false clone https://${GITLAB_DOMAIN_NAME}/YOUR_GIT_REPO
+
+or
+
+git config --global http.sslVerify false
+
+```
 # Get Nexus Password
 
 ```
 cat /var/lib/docker/volumes/iac_nexus_data/_data/admin.password
 ```
 Default user: admin
-URL: http://10.20.30.10/
+URL: https://${NEXUS_DOMAIN_NAME}
 
 
 # Deploy ETCD
@@ -53,5 +66,3 @@ docker run -d --name etcd-server \
     --env ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379 \
     bitnami/etcd:3.4.18
 ```
-
-URL: http://10.20.30.10:2379
