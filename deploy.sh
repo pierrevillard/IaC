@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 if [ "${NEXUS_DOMAIN_NAME}" = "" ];then
         read -p "nexus domain name: " NEXUS_DOMAIN_NAME
 fi
