@@ -1,3 +1,9 @@
+# PREREQUIS
+
+You must install: docker, docker-compose
+You also need : git, openssl, envsubst, bash  (But these packages are usually already installed on Linux OS)
+
+
 # Get the stack:
 
 ```
