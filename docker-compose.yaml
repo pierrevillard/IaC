@@ -15,10 +15,8 @@ services:
         nginx['listen_https'] = false
         sidekiq['max_concurrency'] = 10
         prometheus_monitoring['enable'] = false
-    ports:
-      - '9080:9080'
-      - '9443:9443'
-      - '9022:22'
+    expose:
+      - 9080
     volumes:
       - ./ssl/gitlab:/var/gitlab/ssl
       - gitlab_config:/etc/gitlab
@@ -37,9 +35,8 @@ services:
     volumes:
       - jenkins_data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - "8080:8080"
-      - "5000:5000"
+    expose:
+      - 8080
     networks:
       - devops-net
 
@@ -51,8 +48,8 @@ services:
     mem_limit: '2g'
     volumes:
       - nexus_data:/nexus-data
-    ports:
-      - "8081:8081"
+    expose:
+      - 8081
     networks:
       - devops-net
 
