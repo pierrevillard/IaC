@@ -21,6 +21,7 @@ This script will ask you for domains used to publish Nexus, Jenkins and Gitlab U
 Domain names are needed to configure/generate HTTPs certs/keys and Nginx Proxy redirects.
 
 
+
 # Can be totally destroyed with: 
 
 ```
@@ -72,3 +73,11 @@ docker run -d --name etcd-server \
     --env ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379 \
     bitnami/etcd:3.4.18
 ```
+
+
+
+
+
+
+
+NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=jenkins.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan REGISTRY_DOMAIN_NAME=registry.local.lan ./script.sh
