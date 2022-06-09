@@ -14,7 +14,7 @@ cd IaC
 # Can be launched with :
 
 ```
-./deploy.sh
+NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=jenkins.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan ./deploy.sh
 ```
 
 This script will ask you for domains used to publish Nexus, Jenkins and Gitlab URLs.
