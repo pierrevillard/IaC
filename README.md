@@ -58,7 +58,7 @@ cat /var/lib/docker/volumes/iac_gitlab_config/_data/initial_root_password
 Default user: root
 URL: https://${GITLAB_DOMAIN_NAME}
 
-Due to self-signed certs
+IF you don't install your PKI CA/INTER-FULL-CHAIN crt on your host:
 
 ```
 git -c http.sslVerify=false clone https://${GITLAB_DOMAIN_NAME}/YOUR_GIT_REPO
