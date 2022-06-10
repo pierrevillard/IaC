@@ -14,7 +14,8 @@ cd IaC
 # Can be launched with :
 
 ```
-NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=jenkins.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan ./deploy.sh
+NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=jenkins.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan ./init.sh
+docker-compose up -d
 ```
 
 This script will ask you for domains used to publish Nexus, Jenkins and Gitlab URLs.
@@ -77,14 +78,7 @@ docker run -d --name etcd-server \
 
 
 
-
-
-
-NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=jenkins.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan REGISTRY_DOMAIN_NAME=registry.local.lan ./script.sh
-
-
-
-
+# Trust CA for your Host and browser
 
 If you wanna validate PKI certs on your host, juste install the 2 following certs as "trusterd CA certs" on your host !
 ```
