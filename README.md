@@ -2,6 +2,16 @@
 
 You must install: docker, docker-compose and cfssl/cfssljson (https://github.com/cloudflare/cfssl)
 
+You can Install CFSSL/CFSSLJSON with following commands:
+
+```
+wget https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssljson_1.6.1_linux_amd64
+mv cfssljson_1.6.1_linux_amd64 /bin/cfssljson
+wget https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl_1.6.1_linux_amd64
+mv cfssl_1.6.1_linux_amd64 /bin/cfssl
+
+```
+
 You also need : git, openssl, envsubst, bash  (But these packages are usually already installed on Linux OS)
 
 
