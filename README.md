@@ -7,7 +7,7 @@ You also need : git, openssl, envsubst, bash  (But these packages are usually al
 # Get the stack:
 
 ```
-git clone https://github.com/pierreilki/IaC.git"
+git clone https://github.com/pierreilki/IaC.git
 cd IaC
 ```
 
