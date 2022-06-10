@@ -21,6 +21,8 @@ docker-compose up -d
 This script will ask you for domains used to publish Nexus, Jenkins and Gitlab URLs.
 Domain names are needed to configure/generate HTTPs certs/keys and Nginx Proxy redirects.
 
+Note: By default, PKI certs will also trust your devops host IP according to "hostname -i" commande. You can change the default IP by adding HOST_IP=[YOUR_IP} variable
+
 
 
 # Can be totally destroyed with: 
