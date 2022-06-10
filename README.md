@@ -1,6 +1,6 @@
 # PREREQUIS
 
-You must install: docker, docker-compose
+You must install: docker, docker-compose and cfssl/cfssljson (https://github.com/cloudflare/cfssl)
 You also need : git, openssl, envsubst, bash  (But these packages are usually already installed on Linux OS)
 
 
