@@ -9,7 +9,7 @@ services:
     mem_limit: '4g'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://gitlab.example.com/'
+        external_url 'https://${GITLAB_DOMAIN_NAME}/'
         puma['worker_processes'] = 0
         nginx['listen_port'] = 443
         nginx['listen_https'] = true
