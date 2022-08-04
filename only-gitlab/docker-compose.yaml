@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ce:15.0.0-ce.0'
+    restart: always
+    container_name: gitlab
+    cpu_shares: 1024
+    mem_limit: '4g'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.example.com/'
+        puma['worker_processes'] = 0
+        nginx['listen_port'] = 443
+        nginx['listen_https'] = true
+        nginx['redirect_http_to_https'] = true
+        nginx['ssl_certificate'] = "/pki/gitlab/certif-fullchain.crt"
+        nginx['ssl_certificate_key'] = "/pki/gitlab/certif-key.pem"
+        sidekiq['max_concurrency'] = 10
+        prometheus_monitoring['enable'] = false
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+      - ./pki:/pki
+    networks:
+      - devops-net
+
+
+
+volumes:
+  gitlab_config: {}
+  gitlab_logs: {}
+  gitlab_data: {}
+
+networks:
+  devops-net:
+    driver: bridge
