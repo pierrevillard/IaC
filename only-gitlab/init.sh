@@ -105,4 +105,4 @@ cat pki/gitlab/certif.pem pki/inter/inter-fullchain.crt > pki/gitlab/certif-full
 
 
 
-#GITLAB_DOMAIN_NAME=${GITLAB_DOMAIN_NAME} envsubst < docker-compose.yaml.template > docker-compose.yaml
+GITLAB_DOMAIN_NAME=${GITLAB_DOMAIN_NAME} envsubst < docker-compose.yaml.template > docker-compose.yaml
