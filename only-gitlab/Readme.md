@@ -1,1 +1,1 @@
-cat /var/lib/docker/volumes/only-gitlab_gitlab_config/_data/
+cat /var/lib/docker/volumes/only-gitlab_gitlab_config/_data/initial_root_password
