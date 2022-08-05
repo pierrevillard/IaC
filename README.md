@@ -7,8 +7,10 @@ You can Install CFSSL/CFSSLJSON with following commands:
 ```
 wget https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssljson_1.6.1_linux_amd64
 mv cfssljson_1.6.1_linux_amd64 /bin/cfssljson
+chmod +x /bin/cfssljson
 wget https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl_1.6.1_linux_amd64
 mv cfssl_1.6.1_linux_amd64 /bin/cfssl
+chmod +x /bin/cfssl
 
 ```
 
