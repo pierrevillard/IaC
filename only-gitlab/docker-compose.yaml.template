@@ -18,6 +18,7 @@ services:
         nginx['ssl_certificate_key'] = "/pki/gitlab/certif-key.pem"
         sidekiq['max_concurrency'] = 10
         prometheus_monitoring['enable'] = false
+        letsencrypt['enable'] = false
     ports:
       - 443:443
       - 80:80
