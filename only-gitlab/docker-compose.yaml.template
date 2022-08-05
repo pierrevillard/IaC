@@ -19,6 +19,9 @@ services:
         sidekiq['max_concurrency'] = 10
         prometheus_monitoring['enable'] = false
         letsencrypt['enable'] = false
+        registry_external_url 'https://gitlab.example.com:5050'
+        registry_nginx['ssl_certificate'] = "/pki/gitlab/certif-fullchain.crt"
+        egistry_nginx['ssl_certificate_key'] = "/pki/gitlab/certif-key.pem"
     ports:
       - 443:443
       - 80:80
