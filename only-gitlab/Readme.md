@@ -149,25 +149,33 @@ default:
       -backend-config=unlock_method=DELETE \
       -backend-config=retry_wait_min=5
 
-validate-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+validate-job:
+  stage: test
   tags:
     - docker
   script:
     - terraform validate
 
-plan-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
+plan-job:
+  stage: test
   tags:
     - docker
   script:
     - terraform plan
 
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+deploy-job:
+  stage: deploy
   tags:
     - docker
   script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - terraform apply -auto-approve
+
+delete-job:
+  stage: deploy
+  when: manual
+  tags:
+    - docker
+  script:
+    - terraform destroy -auto-approve
+
 ```
