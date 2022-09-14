@@ -36,8 +36,8 @@ ADD gitlab CRT to host:
 cp ../IaC/only-gitlab/pki/gitlab/certif-fullchain.crt /etc/ssl/certs/
 ```
 
-
-
+depuis le runner:
+cp /etc/gitlab-pki/certif-fullchain.crt .
 
 example pipeline for Docker build and push. Registry must be enabled for project
 
