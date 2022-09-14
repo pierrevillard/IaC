@@ -2,11 +2,11 @@ version: "3.9"
 
 services:
   gitlab:
-    image: 'gitlab/gitlab-ce:15.0.0-ce.0'
+    image: 'gitlab/gitlab-ce:15.3.3-ce.0'
     restart: always
     container_name: gitlab
-    cpu_shares: 1024
-    mem_limit: '4g'
+    cpu_shares: 2048
+    mem_limit: '8g'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://${GITLAB_DOMAIN_NAME}/'
@@ -19,9 +19,9 @@ services:
         sidekiq['max_concurrency'] = 10
         prometheus_monitoring['enable'] = false
         letsencrypt['enable'] = false
-        registry_external_url 'https://gitlab.example.com:5050'
+        registry_external_url 'https://${GITLAB_DOMAIN_NAME}:5050'
         registry_nginx['ssl_certificate'] = "/pki/gitlab/certif-fullchain.crt"
-        egistry_nginx['ssl_certificate_key'] = "/pki/gitlab/certif-key.pem"
+        registry_nginx['ssl_certificate_key'] = "/pki/gitlab/certif-key.pem"
     ports:
       - 443:443
       - 80:80
