@@ -19,7 +19,16 @@ Register a runner:
 ```
 gitlab-runner register --url <REPO_URL> --registration-token <REPO_TOKEN>
 ```
-
+Fichier tolm DU RUNNER
+Ajouter :
+```
+[[runners]]
+...
+  [runners.docker]
+  ...
+    privileged = true
+    extra_hosts = ["repo.mydomain.com:172.23.8.182"]
+```
 
 ADD gitlab CRT to host:
 
