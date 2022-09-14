@@ -112,6 +112,15 @@ deploy-job:      # This job runs in the deploy stage.
     - echo "Application successfully deployed."
 ```
 
+
+
+
+
+
+
+
+# Sample Terraform
+
 ```
 stages:          # List of stages for jobs, and their order of execution
   - build
