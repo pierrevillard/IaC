@@ -112,3 +112,53 @@ deploy-job:      # This job runs in the deploy stage.
     - echo "Application successfully deployed."
 ```
 
+```
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy
+
+default:
+  tags:
+    - docker
+  image:
+    name: repopierre.lan:5050/gitlab-instance-cab7ea5b/image-terraform:main-20
+  before_script:
+  - |
+    echo "-----BEGIN CERTIFICATE-----
+    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    -----END CERTIFICATE-----" >> /etc/ssl/certs/repopierre-ca-cert-bundle.crt
+    terraform init \
+      -backend-config=address=https://repopierre.lan/api/v4/projects/2/terraform/state/statefile \
+      -backend-config=lock_address=https://repopierre.lan/api/v4/projects/2/terraform/state/statefile/lock \
+      -backend-config=unlock_address=https://repopierre.lan/api/v4/projects/2/terraform/state/statefile/lock \
+      -backend-config=username=root \
+      -backend-config=password=<GITLAB-PERSONNAL-TOKEN> \
+      -backend-config=lock_method=POST \
+      -backend-config=unlock_method=DELETE \
+      -backend-config=retry_wait_min=5
+
+validate-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  tags:
+    - docker
+  script:
+    - terraform validate
+
+plan-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  tags:
+    - docker
+  script:
+    - terraform plan
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  tags:
+    - docker
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
+```
