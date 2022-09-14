@@ -25,6 +25,7 @@ services:
     ports:
       - 443:443
       - 80:80
+      - 5050:5050
     volumes:
       - gitlab_config:/etc/gitlab
       - gitlab_logs:/var/log/gitlab
