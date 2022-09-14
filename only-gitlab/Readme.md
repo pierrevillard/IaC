@@ -9,7 +9,7 @@ docker run -d --name gitlab-runner --restart always \
   -v /srv/gitlab-runner/config:/etc/gitlab-runner \
   -v /root/IaC/only-gitlab/pki/gitlab:/etc/gitlab-pki \
   -e "CA_CERTIFICATES_PATH=/etc/gitlab-pki/certif-fullchain.crt" \
-  gitlab/gitlab-runner:latest
+  gitlab/gitlab-runner:v15.3.0
 ```
 
 Register a runner:
