@@ -3,6 +3,7 @@ cat /var/lib/docker/volumes/only-gitlab_gitlab_config/_data/initial_root_passwor
 
 
 Deploy a runner
+
 ```
 docker run -d --name gitlab-runner --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -14,6 +15,14 @@ docker run -d --name gitlab-runner --restart always \
 ```
 
 Register a runner:
+
 ```
 gitlab-runner register --url <REPO_URL> --registration-token <REPO_TOKEN>
+```
+
+
+ADD gitlab CRT to host:
+
+```
+cp ../IaC/only-gitlab/pki/gitlab/certif-fullchain.crt /etc/ssl/certs/
 ```
