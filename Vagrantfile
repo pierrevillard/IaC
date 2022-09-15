@@ -32,33 +32,34 @@ echo '
 /dev/mapper/vagrant--vg-root /               ext4    errors=remount-ro 0       1
 /vagrant /vagrant vboxsf uid=1000,gid=1000,nofail 0 0
 ' > /etc/fstab
-
 swapoff -a
-
-
+wget https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssljson_1.6.1_linux_amd64
+mv cfssljson_1.6.1_linux_amd64 /bin/cfssljson
+chmod +x /bin/cfssljson
+wget https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl_1.6.1_linux_amd64
+mv cfssl_1.6.1_linux_amd64 /bin/cfssl
+chmod +x /bin/cfssl
 echo '
 127.0.0.1       localhost
 127.0.1.1       vagrant.vm      vagrant
-
 # The following lines are desirable for IPv6 capable hosts
 ::1     localhost ip6-localhost ip6-loopback
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 10.20.30.10 devops
 ' > /etc/hosts
-
 SCRIPT
 
 
 
 Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: $script
-    config.vm.box = "bento/ubuntu-20.04"
+    config.vm.box = "bento/ubuntu-22.04"
 	config.vm.define "devops" do |devops|
 		devops.vm.hostname = "devops"
 		devops.vm.network "private_network", ip: "10.20.30.10"
 		devops.vm.provider "virtualbox" do |v|
-			v.memory = 13000
+			v.memory = 12000
 			v.cpus = 2
 			v.name = "devops"
 		end
