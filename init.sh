@@ -4,14 +4,11 @@ if [ "${NEXUS_DOMAIN_NAME}" = "" ];then
         read -p "nexus domain name: " NEXUS_DOMAIN_NAME
 fi
 if [ "${JENKINS_DOMAIN_NAME}" = "" ];then
-        read -p "jenkins domain name: " JENKINS_DOMAIN_NAME
+        read -p "sonarqube domain name: " JENKINS_DOMAIN_NAME
 fi
 if [ "${GITLAB_DOMAIN_NAME}" = "" ];then
         read -p "gitlab domain name: " GITLAB_DOMAIN_NAME
 fi
-#if [ "${REGISTRY_DOMAIN_NAME}" = "" ];then
-#        read -p "Registry domain name: " REGISTRY_DOMAIN_NAME
-#fi
 if [ "${HOST_IP}" = "" ];then
         HOST_IP=$(hostname -i)
 fi
@@ -244,23 +241,13 @@ http {
         }
     }
 
-#    server {
-#        server_name ${REGISTRY_DOMAIN_NAME};
-#        listen 443 ssl http2;
-#        ssl_certificate /var/pki/registry/certif-fullchain.crt;
-#        ssl_certificate_key /var/pki/registry/certif-key.pem;
-#        location / {
-#          proxy_pass http://nexus:8082;
-#        }
-#    }
-
     server {
 	server_name ${JENKINS_DOMAIN_NAME};
 	listen 443 ssl http2;
         ssl_certificate /var/pki/jenkins/certif-fullchain.crt;
         ssl_certificate_key /var/pki/jenkins/certif-key.pem;
         location / {
-          proxy_pass http://jenkins:8080;
+          proxy_pass http://sonarqube:9000;
         }
     }
 
