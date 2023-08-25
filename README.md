@@ -20,7 +20,7 @@ You also need : git, openssl, envsubst, bash  (But these packages are usually al
 # Get the stack:
 
 ```
-git clone https://github.com/pierreilki/IaC.git -b
+git clone https://github.com/pierreilki/IaC.git -b sonar
 cd IaC
 ```
 
@@ -37,7 +37,7 @@ ulimit -u 8192
 
 ```
 NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=sonarqube.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan ./init.sh
-docker-compose up -d
+docker compose up -d
 ```
 
 This script will ask you for domains used to publish Nexus, Jenkins and Gitlab URLs.
