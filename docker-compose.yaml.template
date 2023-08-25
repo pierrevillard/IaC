@@ -52,7 +52,7 @@ services:
     networks:
       - devops-net
 
- sonarqube:
+  sonarqube:
     image: sonarqube:community
     container_name: sonarqube
     depends_on:
