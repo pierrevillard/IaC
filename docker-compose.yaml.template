@@ -24,21 +24,6 @@ services:
     networks:
       - devops-net
 
-
-  jenkins:
-    build: ./images/jenkins/
-    restart: always
-    container_name: jenkins
-    cpu_shares: 500
-    mem_limit: '1g'
-    volumes:
-      - jenkins_data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-    expose:
-      - 8080
-    networks:
-      - devops-net
-
   nexus:
     image: sonatype/nexus3:3.39.0
     restart: always
@@ -103,7 +88,6 @@ volumes:
   postgresql: {}
   postgresql_data: {}
   nexus_data: {}
-  jenkins_data: {}
   gitlab_config: {}
   gitlab_logs: {}
   gitlab_data: {}
