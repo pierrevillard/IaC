@@ -100,7 +100,7 @@ Default user: admin
 URL: https://${NEXUS_DOMAIN_NAME}
 
 
-# Deploy ETCD
+# Deploy ETCD (Not needed )
 
 ```
 docker run -d --name etcd-server \
