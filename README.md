@@ -26,7 +26,7 @@ cd IaC
 
 # Can be launched with :
 
-With sonar, make sure following commands are run before deploy stack:
+With sonar, make sure following commands are run before deploy stack (**At every reboot !!**):
 ```
 sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
