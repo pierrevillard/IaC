@@ -26,8 +26,17 @@ cd IaC
 
 # Can be launched with :
 
+With sonar, make sure following commands are run before deploy stack:
 ```
-NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=jenkins.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan ./init.sh
+sysctl -w vm.max_map_count=524288
+sysctl -w fs.file-max=131072
+ulimit -n 131072
+ulimit -u 8192
+```
+
+
+```
+NEXUS_DOMAIN_NAME=nexus.local.lan JENKINS_DOMAIN_NAME=sonarqube.local.lan GITLAB_DOMAIN_NAME=gitlab.local.lan ./init.sh
 docker-compose up -d
 ```
 
